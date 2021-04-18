@@ -32,3 +32,5 @@ router.get("/api/transaction", (req, res) => {
     });//end of .then
 
 });//end of router.get route for sort  by date
+
+module.exports = router;
