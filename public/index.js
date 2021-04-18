@@ -1,4 +1,3 @@
-const { send } = require("node:process");
 
 let transactions = [];
 let myChart;
