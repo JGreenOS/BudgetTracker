@@ -27,9 +27,11 @@ router.get("/api/transaction", (req, res) => {
     Transaction.find( {} )
     .sort({ date: -1 })
     .then(dbTransaction => {
-        res.json(400).json(err);
-
-    });//end of .then
+        res.json(dbTransaction);
+    })//end of .then
+    .catch(err => {
+        res.status(400).json(err);
+    }); //end of .catch
 
 });//end of router.get route for sort  by date
 

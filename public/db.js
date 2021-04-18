@@ -8,7 +8,7 @@ request.onupgradeneeded = function(event) {
 };
 
 request.onsuccess = function(event) {
-    db = event.target.results;
+    db = event.target.result;
     if (navigator.onLine) {
         checkDatabase();
     }
@@ -25,8 +25,8 @@ function saveRecord(record) {
 } //end of save record function
 
 function checkDatabase () {
-    const transaction = db.transaction( ["pending"], "readwrite");
-    const store = transaction.objectStore ("pending");
+    const transaction = db.transaction(["pending"], "readwrite");
+    const store = transaction.objectStore("pending");
     const getAll = store.getAll();
 
     getAll.onsuccess = function () {
@@ -40,7 +40,7 @@ function checkDatabase () {
                 }//end of headers
             })//end of fetch function and if statemenyt
             .then(response => response.json())
-            .then( () => {
+            .then(() => {
                 const transaction = db.transaction(["pending"], "readwrite");
                 const store = transaction.objectStore("pending");
                 store.clear();

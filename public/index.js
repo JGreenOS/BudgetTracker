@@ -1,25 +1,25 @@
-
 let transactions = [];
 let myChart;
 
-fetch('/api/tranaction')
+fetch('/api/transaction')
 .then((response) => response.json())
 .then((data) => {
     transactions = data;
     populateTotal();
-    populateChart();
     populateTable();
+    populateChart();
 });  //end of fetch
 
 function populateTotal() {
     const total = transactions
     .reduce((total, t) => {
-        return total + parseFloat(t.value);} , 0)
+        return total + parseFloat(t.value);
+    }, 0)
         .toFixed(2);
         
     const totalEl = document.querySelector('#total');
     totalEl.textContent = total;    
-}
+}//end of populate Total function
 
 function populateTable(){
     const tbody = document.querySelector('#tbody');
@@ -55,7 +55,7 @@ function populateChart() {
 
     const ctx = document.getElementById('my-chart').getContext('2d');
 
-    myChart = new CharacterData(ctx, {
+    myChart = new Chart (ctx, {
         type: 'line', 
         data: {
             labels,
