@@ -19,17 +19,17 @@ request.onerror = function(event) {
 };
 
 function saveRecord(record) {
-    const transaction = db.transaction( ["pending"], "readwrite");
-    const store = transaction.objectStore ("pending");
+    const transaction = db.transaction(["pending"], "readwrite");
+    const store = transaction.objectStore("pending");
     store.add(record);
 } //end of save record function
 
-function checkDatabase () {
+function checkDatabase() {
     const transaction = db.transaction(["pending"], "readwrite");
     const store = transaction.objectStore("pending");
     const getAll = store.getAll();
 
-    getAll.onsuccess = function () {
+    getAll.onsuccess = function() {
         if (getAll.result.length > 0) {
             fetch("/api/transaction/bulk", {
                 method: "POST", 

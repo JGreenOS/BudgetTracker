@@ -59,7 +59,8 @@ function populateChart() {
         type: 'line', 
         data: {
             labels,
-            datasets: [{
+            datasets: [
+                {
                 label: 'Total over time', 
                 fill: true,
                 backgroundCOlor: '#6666ff',
@@ -73,14 +74,14 @@ function populateChart() {
 function sendTransaction(isAdding) {
     const nameEl = document.querySelector('#t-name');
     const amountEl = document.querySelector('#t-amount');
-    const errorEl = document.querySelector('form.error');
+    const errorEl = document.querySelector('form .error');
 
-    if(nameEl.value === '' || amountEl.value === ' ')
+    if(nameEl.value === '' || amountEl.value === '')
     {
-        errorEl.textContent = 'Missing Information';
+        errorEl.textContent = "Missing Information";
         return;
     }    else {
-        error.El.textContent = '';
+        errorEl.textContent='';
         }
 
     const transaction = {
@@ -111,8 +112,8 @@ function sendTransaction(isAdding) {
         if(data.errors) {
             errorEl.textContent = 'Missing info';
         } else {
-            nameEl.value = '';
-            amountEl.value = '';
+            nameEl.value ='';
+            amountEl.value ='';
         }
     })//end of the .then 
  .catch((err) => {
