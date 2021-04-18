@@ -129,7 +129,7 @@ document.querySelector('#add-btn').addEventListener('click', function (event) {
     sendTransaction(true);
 }); //endof the event function to send add funds
 
-document.querySelector('#sub-btn').addEventListener('click' function (event) {
+document.querySelector('#sub-btn').addEventListener('click', function (event) {
     event.preventDefault();
     sendTransaction(false);
 }); //end of event function to send subtract funds
