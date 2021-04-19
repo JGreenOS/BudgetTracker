@@ -1,48 +1,27 @@
 
-const request = window.indexedDB.open("budget", 1);
+const request = window.indexedDB.open("budget", 2);
 let db;
 
     request.onupgradeneeded = function(event) {
-    const db = request.result;
-    db.createObjectStore("pending", {keyPath: "_id"});
+    const db = event.target.result;
+    db.createObjectStore("pending", {keyPath:"name"});
     };
-
-    request.onerror = function(event) {
-        console.log("No can do");
-        };
 
     request.onsuccess = function(event) {
-    db = request.result;
-    tx = db.transaction("pending", "readwrite");
-    store = tx.objectStore("pending");
-    
-    db.onerror = function (e) {
-        console.log("error");
-    };
+    db = event.target.result;
+     if(navigator.onLine) {
+         checkDatabase();
+     }
+    }; 
 
-    if (method === "put") {
-        store.put(object);
-    }
-    if (method === "clear") {
-        store.clear();
-    }
-    if (method === "get") {
-        const all = store.getAll();
-        all.onsuccess = function () {
-            resolve(all.result);
-    };
-}
-
-        tx.oncomplete = function() {
-        db.close();
-        };
-    };
+    // request.onerror = function(event) {
+    //     console.log("Error!" + event.target.errorCode);
     
 
     function saveRecord(record) {
-    const transaction = db.transaction(["pending"], "readwrite");
-    const store = transaction.objectStore("pending");
-    store.add(record);
+    const transaction = db.transaction("pending", "readwrite");
+    const pendingStore = transaction.objectStore("pending");
+    pendingStore.add(record);
     } //end of save record function
 
     function checkDatabase() {
