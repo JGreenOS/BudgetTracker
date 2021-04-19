@@ -1,11 +1,10 @@
-export function useIndexedDB(databaseName, storeName, method, object) {
-    return new Promise((resolve, reject) => {
-        const request = window.indexedDB.open("budget", 1);
-    let db, tx, store;
+
+const request = window.indexedDB.open("budget", 1);
+let db;
 
     request.onupgradeneeded = function(event) {
     const db = request.result;
-    db.createObjectStore("pending", { keyPath: "_id" });
+    db.createObjectStore("pending", {keyPath: "_id"});
     };
 
     request.onerror = function(event) {
@@ -38,13 +37,13 @@ export function useIndexedDB(databaseName, storeName, method, object) {
         db.close();
         };
     };
-    }, 
+    
 
     function saveRecord(record) {
     const transaction = db.transaction(["pending"], "readwrite");
     const store = transaction.objectStore("pending");
     store.add(record);
-    }, //end of save record function
+    } //end of save record function
 
     function checkDatabase() {
     const transaction = db.transaction(["pending"], "readwrite");
@@ -69,7 +68,7 @@ export function useIndexedDB(databaseName, storeName, method, object) {
             }); //end of second .then clearing the store after bulk and success
         } //closes fetch
     }; //closes the get all on success function
-    },//end of the checkDatabase
+    }//end of the checkDatabase
 
 window.addEventListener("online", checkDatabase)
 
