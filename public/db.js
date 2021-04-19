@@ -1,30 +1,52 @@
-let db;
+export function useIndexedDB(databaseName, storeName, method, object) {
+    return new Promise((resolve, reject) => {
+        const request = window.indexedDB.open("budget", 1);
+    let db, tx, store;
 
-const request = indexedDB.open("budget", 1);
+    request.onupgradeneeded = function(event) {
+    const db = request.result;
+    db.createObjectStore("pending", { keyPath: "_id" });
+    };
 
-request.onupgradeneeded = function(event) {
-    const db = event.target.result;
-    db.createObjectStore("pending", { autoincrement: true });
-};
+    request.onerror = function(event) {
+        console.log("No can do");
+        };
 
-request.onsuccess = function(event) {
-    db = event.target.result;
-    if (navigator.onLine) {
-        checkDatabase();
+    request.onsuccess = function(event) {
+    db = request.result;
+    tx = db.transaction("pending", "readwrite");
+    store = tx.objectStore("pending");
+    
+    db.onerror = function (e) {
+        console.log("error");
+    };
+
+    if (method === "put") {
+        store.put(object);
     }
-};
+    if (method === "clear") {
+        store.clear();
+    }
+    if (method === "get") {
+        const all = store.getAll();
+        all.onsuccess = function () {
+            resolve(all.result);
+    };
+}
 
-request.onerror = function(event) {
-    console.log("No can do" + event.target.errorCode);
-};
+        tx.oncomplete = function() {
+        db.close();
+        };
+    };
+    }, 
 
-function saveRecord(record) {
+    function saveRecord(record) {
     const transaction = db.transaction(["pending"], "readwrite");
     const store = transaction.objectStore("pending");
     store.add(record);
-} //end of save record function
+    }, //end of save record function
 
-function checkDatabase() {
+    function checkDatabase() {
     const transaction = db.transaction(["pending"], "readwrite");
     const store = transaction.objectStore("pending");
     const getAll = store.getAll();
@@ -47,6 +69,7 @@ function checkDatabase() {
             }); //end of second .then clearing the store after bulk and success
         } //closes fetch
     }; //closes the get all on success function
-    }//end of the checkDatabase
+    },//end of the checkDatabase
 
-window.addEventListener("online", checkDatabase); 
+window.addEventListener("online", checkDatabase)
+

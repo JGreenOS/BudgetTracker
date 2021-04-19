@@ -116,7 +116,7 @@ function sendTransaction(isAdding) {
             amountEl.value ='';
         }
     })//end of the .then 
- .catch((err) => {
+ .catch(err => {
     saveRecord(transaction);
 
     nameEl.value = '';
