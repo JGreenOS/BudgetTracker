@@ -1,7 +1,13 @@
 # BudgetTracker
 An online-offline budget tracker using IndexDB
 
+Screenshot:
 
+https://github.com/JGreenOS/BudgetTracker/blob/main/2021-04-25_17-33-38.png
+
+Link to deployed app: https://enigmatic-spire-99788.herokuapp.com/
+
+########
 
 Task:
 
