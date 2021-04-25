@@ -93,7 +93,7 @@ function sendTransaction(isAdding) {
         transaction.value *= -1;   
     }
 
-    transaction.unshift(transaction);
+    transactions.unshift(transaction);
 
     populateChart();
     populateTable();
