@@ -1,7 +1,7 @@
 let transactions = [];
 let myChart;
 
-fetch('/api/transaction')
+fetch('/api/transaction/')
 .then((response) => response.json())
 .then((data) => {
     transactions = data;
@@ -99,7 +99,7 @@ function sendTransaction(isAdding) {
     populateTable();
     populateTotal();
 
-    fetch('/api/transaction', {
+    fetch('/api/transaction/', {
         method: 'POST',
         body: JSON.stringify(transaction),
         headers: {
