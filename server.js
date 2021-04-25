@@ -12,10 +12,10 @@ app.use(express.static("public"));
 
 const uri = process.env.MONGODB_URI;
 
-// mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ijdcu.mongodb.net/budgettracker?retryWrites=true&w=majority`, {
-//     useNewUrlParser: true,
-//     useFindAndModify: false
-// });
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ijdcu.mongodb.net/budgettracker?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useFindAndModify: false
+});
 
 //get the routes from here
 app.use(require("./routes/api.js"));
